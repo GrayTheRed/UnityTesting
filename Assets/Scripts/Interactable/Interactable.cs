@@ -6,4 +6,6 @@ public interface Interactable
 {
     // Start is called before the first frame update
     public void Interact();
+    public void ShowInteractText();
+    public void HideInteractText();
 }

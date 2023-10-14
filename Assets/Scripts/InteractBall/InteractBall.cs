@@ -28,32 +28,21 @@ public class InteractBall : MonoBehaviour, Interactable
     // Update is called once per frame
     void Update()
     {
-        
-        if (IsOverlapping)
-        {
-            if (playerInput.actions["Interact"].WasPressedThisFrame())
-            {
-                Interact();
-            }
-        }
     }
 
     public void Interact()
     {
         Debug.Log("You hit the interact button");
+        this.gameObject.SetActive(false);
     }
-
-    void OnTriggerEnter (Collider other)
+    public void ShowInteractText()
     {
         InteractText.gameObject.SetActive(true);
-        IsOverlapping = true;
-        Debug.Log($"Interactable");
     }
-
-    void OnTriggerExit (Collider other)
+    
+    public void HideInteractText()
     {
         InteractText.gameObject.SetActive(false);
-        IsOverlapping = false;
     }
 
     void SetFloatingText()
