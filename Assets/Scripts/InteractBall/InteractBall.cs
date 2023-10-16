@@ -33,7 +33,7 @@ public class InteractBall : MonoBehaviour, Interactable
     public void Interact()
     {
         Debug.Log("You hit the interact button");
-        this.gameObject.SetActive(false);
+        Destroy(gameObject);
     }
     public void ShowInteractText()
     {
