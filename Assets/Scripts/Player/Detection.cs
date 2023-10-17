@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public class Detection : MonoBehaviour
 {
     private PlayerInput input;
+    private RaycastHit hit;
+    public Camera playerCam;
 
     private void Awake()
     {
@@ -20,33 +22,33 @@ public class Detection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        TryInteraction();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void TryInteraction()
     {
-        if(other.TryGetComponent<Interactable>(out Interactable interactable))
+        Interactable found = LookForInteractable();
+        InteractWithInteractable(found);
+    }
+#nullable enable
+    private Interactable? LookForInteractable()
+    {
+        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, 25.0f))
         {
-            Debug.Log("Entering Trigger");
+            if(hit.collider.gameObject.TryGetComponent<Interactable>(out Interactable interact))
+            {
+                return interact;
+            }
+        } 
+        return null;
+    }
+
+    private void InteractWithInteractable(Interactable? interactable)
+    {
+        if(null != interactable)
+        {
             interactable.ShowInteractText();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-
-        if (other.TryGetComponent<Interactable>(out Interactable interactable))
-        {
-            Debug.Log("Exiting Trigger");
-            interactable.HideInteractText();
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.TryGetComponent<Interactable>(out Interactable interactable))
-        {
-            if (input.actions["Interact"].WasPressedThisFrame())
+            if (hit.distance <= 10.0f && input.actions["Interact"].WasPressedThisFrame())
             {
                 interactable.Interact();
             }
