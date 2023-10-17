@@ -21,6 +21,7 @@ public class DestroyOnInteract : MonoBehaviour
     public void ShowInteractText()
     {
         InteractText.gameObject.SetActive(true);
+        Invoke("HideInteractText", 4.0f);
     }
 
     public void HideInteractText()
