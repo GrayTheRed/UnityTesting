@@ -22,9 +22,10 @@ public class PlayerStatsScriptableObject : ScriptableObject
         }
     }
     
-    public void DecreaseHealth(int amount)
+    public void ChangeHealth(int amount)
     {
-        CurrentHealth -= amount;
+        CurrentHealth += amount;
         healthChangeEvent.Invoke(amount);
+        Debug.Log($"Changing player health by {amount}");
     }
 }
