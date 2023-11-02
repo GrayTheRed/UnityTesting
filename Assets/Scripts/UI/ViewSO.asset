@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ViewSO
   m_EditorClassIdentifier: 
   padding:
-    m_Left: 0
-    m_Right: 0
+    m_Left: 10
+    m_Right: 10
     m_Top: 0
     m_Bottom: 0
   spacing: 0
